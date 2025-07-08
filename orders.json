@@ -1,0 +1,25 @@
+{
+    "order_2": {
+        "user": "aaronprisching@gmail.com",
+        "date": "2025-05-25 20:32:30",
+        "status": "pending_payment",
+        "restaurant": "burger_king",
+        "items": [
+            {
+                "id": "whopper",
+                "name": "Whopper",
+                "price": 6.99,
+                "image": "images/classic-burger.jpg",
+                "quantity": 1
+            },
+            {
+                "id": "fries",
+                "name": "Pommes Frites",
+                "price": 2.99,
+                "image": "images/fries.jpg",
+                "quantity": 1
+            }
+        ],
+        "total": 9.98
+    }
+}

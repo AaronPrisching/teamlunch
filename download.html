@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamLunch App herunterladen</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Lade die TeamLunch App herunter für Android, iOS und Windows. Gemeinsam bestellen war nie einfacher!">
+    <meta name="theme-color" content="#38BDF8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TeamLunch">
+    <meta name="msapplication-TileColor" content="#0F172A">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Favicons and Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180x180.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#38BDF8">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0F172A',
+                            800: '#1C1C1E',
+                        },
+                        accent: {
+                            blue: '#38BDF8',
+                            green: '#84CC16',
+                            purple: '#A855F7',
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .app-store-button {
+            transition: all 0.3s ease;
+        }
+        .app-store-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card {
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-white font-poppins dark">
+    <!-- Navigation -->
+    <nav class="backdrop-blur-md bg-dark-800/70 border-b border-dark-900/50">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="index.html" class="text-xl font-bold text-accent-blue">
+                    Team<span class="text-accent-green">Lunch</span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="index.html" class="text-white/80 hover:text-accent-blue transition-colors">Home</a>
+                <a href="voting.html" class="text-white/80 hover:text-accent-blue transition-colors">Abstimmung</a>
+                <a href="order.html" class="text-white/80 hover:text-accent-blue transition-colors">Bestellungen</a>
+                <a href="profile.html" class="text-white/80 hover:text-accent-blue transition-colors">Profil</a>
+                <a href="faq.html" class="text-white/80 hover:text-accent-blue transition-colors">Hilfe</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="px-4 py-2 bg-dark-900/70 backdrop-blur-sm rounded-lg border border-accent-blue/20 hover:border-accent-blue/50 transition-all hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] text-white/90">
+                    Anmelden
+                </a>
+                <a href="register.html" class="px-4 py-2 bg-gradient-to-r from-accent-blue to-accent-purple rounded-lg hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all text-white">
+                    Registrieren
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto text-center">
+            <div class="mb-8">
+                <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-accent-blue to-accent-purple rounded-3xl flex items-center justify-center shadow-2xl">
+                    <svg class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                </div>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-accent-blue via-accent-green to-accent-purple bg-clip-text text-transparent">
+                TeamLunch App
+            </h1>
+            <p class="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
+                Lade die TeamLunch App herunter und bestelle gemeinsam mit deinem Team - 
+                jetzt verfügbar für alle Plattformen!
+            </p>
+            
+            <!-- Quick Install PWA Button -->
+            <div class="mb-12">
+                <button id="install-pwa-btn" class="hidden px-8 py-4 bg-gradient-to-r from-accent-green to-accent-blue rounded-xl text-white font-semibold hover:shadow-[0_0_30px_rgba(132,204,22,0.4)] transition-all">
+                    <svg class="w-6 h-6 inline mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Jetzt installieren (PWA)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Options -->
+    <section class="py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Verfügbar auf allen Plattformen</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <!-- Android -->
+                <div class="feature-card bg-dark-800/60 rounded-2xl p-8 border border-white/10 text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.2439 13.8452 7.8508 12 7.8508s-3.5902.3931-5.1367 1.0989L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.61 10.2718.8995 12.8447.8995 15.8195v.8822c0 .4686.3807.8493.8493.8493h19.5024c.4686 0 .8493-.3807.8493-.8493v-.8822c0-2.9748-1.7105-5.5477-5.2209-6.4981"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Android</h3>
+                    <p class="text-white/60 mb-6">Verfügbar im Google Play Store</p>
+                    
+                    <!-- Google Play Store Button -->
+                    <a href="https://play.google.com/store/apps/details?id=com.teamlunch.app" target="_blank" class="app-store-button inline-block mb-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14">
+                    </a>
+                    
+                    <!-- Direct APK Download -->
+                    <div class="mt-4">
+                        <button onclick="downloadFile('teamlunch-android.apk', 'Android APK')" class="text-accent-blue hover:text-accent-green transition-colors text-sm bg-dark-900/50 px-4 py-2 rounded-lg border border-accent-blue/20 hover:border-accent-blue/50">
+                            📱 Direkt APK herunterladen
+                        </button>
+                    </div>
+                    
+                    <div class="mt-4 text-xs text-white/40">
+                        Version 1.0.0 • 25 MB • Android 7.0+
+                    </div>
+                </div>
+
+                <!-- iOS -->
+                <div class="feature-card bg-dark-800/60 rounded-2xl p-8 border border-white/10 text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-gray-600 to-gray-800 rounded-2xl flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">iOS</h3>
+                    <p class="text-white/60 mb-6">Verfügbar im App Store</p>
+                    
+                    <!-- App Store Button -->
+                    <a href="https://apps.apple.com/app/teamlunch/id123456789" target="_blank" class="app-store-button inline-block mb-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" class="h-14">
+                    </a>
+                    
+                    <!-- TestFlight Beta -->
+                    <div class="mt-4">
+                        <a href="https://testflight.apple.com/join/teamlunch" class="text-accent-blue hover:text-accent-green transition-colors text-sm bg-dark-900/50 px-4 py-2 rounded-lg border border-accent-blue/20 hover:border-accent-blue/50 inline-block">
+                            🧪 Beta über TestFlight
+                        </a>
+                    </div>
+                    
+                    <div class="mt-4 text-xs text-white/40">
+                        Version 1.0.0 • 30 MB • iOS 12.0+
+                    </div>
+                </div>
+
+                <!-- Windows -->
+                <div class="feature-card bg-dark-800/60 rounded-2xl p-8 border border-white/10 text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.351"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Windows</h3>
+                    <p class="text-white/60 mb-6">Verfügbar im Microsoft Store</p>
+                    
+                    <!-- Microsoft Store Button -->
+                    <a href="https://www.microsoft.com/store/apps/teamlunch/9NBLGGH123456" target="_blank" class="app-store-button inline-block mb-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Get_it_from_Microsoft_Badge.svg" alt="Get it from Microsoft" class="h-14">
+                    </a>
+                    
+                    <!-- Direct Download -->
+                    <div class="mt-4">
+                        <button onclick="downloadFile('teamlunch-windows.exe', 'Windows Installer')" class="text-accent-blue hover:text-accent-green transition-colors text-sm bg-dark-900/50 px-4 py-2 rounded-lg border border-accent-blue/20 hover:border-accent-blue/50">
+                            💻 Direkt herunterladen (.exe)
+                        </button>
+                    </div>
+                    
+                    <div class="mt-4 text-xs text-white/40">
+                        Version 1.0.0 • 45 MB • Windows 10+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Platforms -->
+    <section class="py-16 px-4 bg-dark-800/30">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Weitere Plattformen</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <!-- macOS -->
+                <div class="feature-card bg-dark-800/60 rounded-xl p-6 border border-white/10 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-gray-400 to-gray-600 rounded-xl flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold mb-2">macOS</h4>
+                    <button onclick="downloadFile('teamlunch-macos.dmg', 'macOS Installer')" class="text-accent-blue hover:text-accent-green transition-colors text-sm bg-dark-900/50 px-3 py-1 rounded border border-accent-blue/20 hover:border-accent-blue/50">
+                        🍎 Download (.dmg)
+                    </button>
+                </div>
+
+                <!-- Linux -->
+                <div class="feature-card bg-dark-800/60 rounded-xl p-6 border border-white/10 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587-.003 1.23-.269 2.26-.334.699-.058 1.574.267 2.577.2.025.134.063.198.114.333l.003.003c.391.778 1.113 1.132 1.884 1.071.771-.06 1.592-.536 2.257-1.306.631-.765 1.683-1.084 2.378-1.503.348-.199.629-.469.649-.853.023-.4-.2-.811-.714-1.376v-.097l-.003-.003c-.17-.2-.25-.535-.338-.926-.085-.401-.182-.786-.492-1.046h-.003c-.059-.054-.123-.067-.188-.135a.357.357 0 00-.19-.064c.431-1.278.264-2.55-.173-3.694-.533-1.41-1.465-2.638-2.175-3.483-.796-1.005-1.576-1.957-1.56-3.368.026-2.152.236-6.133-3.544-6.139zm.529 3.405h.013c.213 0 .396.062.584.198.19.135.33.332.438.533.105.259.158.459.166.724 0-.02.006-.04.006-.06v.105a.086.086 0 01-.004-.021l-.004-.024a1.807 1.807 0 01-.15.706.953.953 0 01-.213.335.71.71 0 00-.088-.042c-.104-.045-.198-.064-.284-.133a1.312 1.312 0 00-.22-.066c-.05-.024-.111-.04-.173-.065-.049-.02-.094-.043-.138-.053a2.617 2.617 0 01-.757-.27 2.048 2.048 0 01-.582-.55 1.235 1.235 0 01-.279-.814c0-.14.016-.333.08-.456.053-.097.134-.24.218-.299z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold mb-2">Linux</h4>
+                    <div class="space-y-2">
+                        <button onclick="downloadFile('teamlunch-linux.deb', 'Linux DEB Package')" class="block w-full text-accent-blue hover:text-accent-green transition-colors text-sm bg-dark-900/50 px-3 py-1 rounded border border-accent-blue/20 hover:border-accent-blue/50">
+                            🐧 Download (.deb)
+                        </button>
+                        <button onclick="downloadFile('teamlunch-linux.rpm', 'Linux RPM Package')" class="block w-full text-accent-blue hover:text-accent-green transition-colors text-sm bg-dark-900/50 px-3 py-1 rounded border border-accent-blue/20 hover:border-accent-blue/50">
+                            🐧 Download (.rpm)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Web App -->
+                <div class="feature-card bg-dark-800/60 rounded-xl p-6 border border-white/10 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-accent-blue to-accent-purple rounded-xl flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold mb-2">Web App</h4>
+                    <a href="/" class="text-accent-blue hover:text-accent-green transition-colors text-sm bg-dark-900/50 px-3 py-1 rounded border border-accent-blue/20 hover:border-accent-blue/50 inline-block">
+                        🌐 Im Browser öffnen
+                    </a>
+                </div>
+
+                <!-- Chrome Extension -->
+                <div class="feature-card bg-dark-800/60 rounded-xl p-6 border border-white/10 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-3.953 6.847c5.769-.873 10.188-5.852 10.188-11.864a11.936 11.936 0 0 0-1.931-6.53z"/>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold mb-2">Chrome Extension</h4>
+                    <a href="https://chrome.google.com/webstore/detail/teamlunch/abcdefghijklmnop" class="text-accent-blue hover:text-accent-green transition-colors text-sm bg-dark-900/50 px-3 py-1 rounded border border-accent-blue/20 hover:border-accent-blue/50 inline-block">
+                        🔗 Chrome Web Store
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Warum die TeamLunch App?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="feature-card bg-dark-800/60 rounded-xl p-6 border border-white/10">
+                    <div class="w-12 h-12 mb-4 bg-accent-blue/20 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-accent-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Schneller Zugriff</h3>
+                    <p class="text-white/60 text-sm">Direkter Zugriff ohne Browser - einfach App öffnen und loslegen.</p>
+                </div>
+
+                <div class="feature-card bg-dark-800/60 rounded-xl p-6 border border-white/10">
+                    <div class="w-12 h-12 mb-4 bg-accent-green/20 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-accent-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19h6v-6H4v6zM16 3h5v5h-5V3zM4 3h6v6H4V3z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Offline-Funktionalität</h3>
+                    <p class="text-white/60 text-sm">Funktioniert auch ohne Internetverbindung - Daten werden synchronisiert.</p>
+                </div>
+
+                <div class="feature-card bg-dark-800/60 rounded-xl p-6 border border-white/10">
+                    <div class="w-12 h-12 mb-4 bg-accent-purple/20 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-accent-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19h6v-6H4v6zM16 3h5v5h-5V3zM4 3h6v6H4V3z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Push-Benachrichtigungen</h3>
+                    <p class="text-white/60 text-sm">Erhalte Benachrichtigungen über neue Abstimmungen und Bestellungen.</p>
+                </div>
+
+                <div class="feature-card bg-dark-800/60 rounded-xl p-6 border border-white/10">
+                    <div class="w-12 h-12 mb-4 bg-accent-blue/20 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-accent-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Sicher & Privat</h3>
+                    <p class="text-white/60 text-sm">Deine Daten sind sicher verschlüsselt und werden nicht an Dritte weitergegeben.</p>
+                </div>
+
+                <div class="feature-card bg-dark-800/60 rounded-xl p-6 border border-white/10">
+                    <div class="w-12 h-12 mb-4 bg-accent-green/20 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-accent-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Native Performance</h3>
+                    <p class="text-white/60 text-sm">Optimiert für jede Plattform - schnell, flüssig und benutzerfreundlich.</p>
+                </div>
+
+                <div class="feature-card bg-dark-800/60 rounded-xl p-6 border border-white/10">
+                    <div class="w-12 h-12 mb-4 bg-accent-purple/20 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-accent-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Automatische Updates</h3>
+                    <p class="text-white/60 text-sm">Immer die neueste Version mit den besten Features und Sicherheitsupdates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Requirements -->
+    <section class="py-16 px-4 bg-dark-800/30">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Systemanforderungen</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="bg-dark-800/60 rounded-xl p-6 border border-white/10">
+                    <h3 class="text-lg font-semibold mb-4 text-accent-blue">Android</h3>
+                    <ul class="space-y-2 text-sm text-white/70">
+                        <li>• Android 7.0 oder höher</li>
+                        <li>• 50 MB freier Speicherplatz</li>
+                        <li>• Internetverbindung erforderlich</li>
+                        <li>• Kamera (optional für Profilbilder)</li>
+                    </ul>
+                </div>
+
+                <div class="bg-dark-800/60 rounded-xl p-6 border border-white/10">
+                    <h3 class="text-lg font-semibold mb-4 text-accent-green">iOS</h3>
+                    <ul class="space-y-2 text-sm text-white/70">
+                        <li>• iOS 12.0 oder höher</li>
+                        <li>• iPhone 6s oder neuer</li>
+                        <li>• 60 MB freier Speicherplatz</li>
+                        <li>• Internetverbindung erforderlich</li>
+                    </ul>
+                </div>
+
+                <div class="bg-dark-800/60 rounded-xl p-6 border border-white/10">
+                    <h3 class="text-lg font-semibold mb-4 text-accent-purple">Windows</h3>
+                    <ul class="space-y-2 text-sm text-white/70">
+                        <li>• Windows 10 oder höher</li>
+                        <li>• 100 MB freier Speicherplatz</li>
+                        <li>• .NET Framework 4.8</li>
+                        <li>• Internetverbindung erforderlich</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-dark-800/40 backdrop-blur-md">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="mb-6">
+                    <a href="index.html" class="text-2xl font-bold text-accent-blue">
+                        Team<span class="text-accent-green">Lunch</span>
+                    </a>
+                </div>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="index.html" class="text-white/60 hover:text-accent-blue transition-colors">Home</a>
+                    <a href="about.html" class="text-white/60 hover:text-accent-blue transition-colors">Über uns</a>
+                    <a href="privacy.html" class="text-white/60 hover:text-accent-blue transition-colors">Datenschutz</a>
+                    <a href="terms.html" class="text-white/60 hover:text-accent-blue transition-colors">AGB</a>
+                    <a href="contact.html" class="text-white/60 hover:text-accent-blue transition-colors">Kontakt</a>
+                </div>
+                <div class="text-white/50 text-sm">
+                    <p>© 2023 TeamLunch. Alle Rechte vorbehalten.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/offline.js"></script>
+    <script>
+        // PWA Install functionality
+        let deferredPrompt;
+        const installButton = document.getElementById('install-pwa-btn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            // Show the install button
+            installButton.classList.remove('hidden');
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Show the install prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                // Clear the deferredPrompt variable
+                deferredPrompt = null;
+                // Hide the install button
+                installButton.classList.add('hidden');
+            }
+        });
+
+        // Check if app is already installed
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            installButton.classList.add('hidden');
+        });
+
+        // Platform detection for download links
+        function detectPlatform() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const platform = navigator.platform.toLowerCase();
+            
+            if (/android/.test(userAgent)) {
+                return 'android';
+            } else if (/iphone|ipad|ipod/.test(userAgent)) {
+                return 'ios';
+            } else if (/win/.test(platform)) {
+                return 'windows';
+            } else if (/mac/.test(platform)) {
+                return 'macos';
+            } else if (/linux/.test(platform)) {
+                return 'linux';
+            }
+            return 'web';
+        }
+
+        // Highlight current platform
+        document.addEventListener('DOMContentLoaded', function() {
+            const platform = detectPlatform();
+            const platformCards = document.querySelectorAll('.feature-card');
+            
+            platformCards.forEach(card => {
+                const title = card.querySelector('h3, h4');
+                if (title && title.textContent.toLowerCase().includes(platform)) {
+                    card.classList.add('ring-2', 'ring-accent-blue');
+                    const badge = document.createElement('div');
+                    badge.className = 'absolute -top-2 -right-2 bg-accent-blue text-white text-xs px-2 py-1 rounded-full';
+                    badge.textContent = 'Empfohlen';
+                    card.style.position = 'relative';
+                    card.appendChild(badge);
+                }
+            });
+        });
+
+        // Download file function with user feedback
+        function downloadFile(filename, displayName) {
+            // Show loading state
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '⏳ Wird heruntergeladen...';
+            button.disabled = true;
+            
+            // Create download link
+            const downloadUrl = `/downloads/${filename}`;
+            
+            // Create a temporary link element
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = filename;
+            link.style.display = 'none';
+            
+            // Add to DOM and trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show success message
+            setTimeout(() => {
+                button.innerHTML = '✅ Download gestartet!';
+                button.classList.add('bg-green-500/20', 'border-green-500/50', 'text-green-400');
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    button.classList.remove('bg-green-500/20', 'border-green-500/50', 'text-green-400');
+                }, 3000);
+            }, 500);
+            
+            // Track download (optional analytics)
+            console.log(`Download started: ${displayName} (${filename})`);
+            
+            // Show toast notification
+            showToast(`${displayName} wird heruntergeladen...`, 'success');
+        }
+
+        // Toast notification function
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
+            
+            // Set colors based on type
+            if (type === 'success') {
+                toast.classList.add('bg-green-500/90', 'text-white', 'border', 'border-green-400/50');
+            } else if (type === 'error') {
+                toast.classList.add('bg-red-500/90', 'text-white', 'border', 'border-red-400/50');
+            } else {
+                toast.classList.add('bg-accent-blue/90', 'text-white', 'border', 'border-accent-blue/50');
+            }
+            
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    ${message}
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Animate in
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Auto remove after 4 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        document.body.removeChild(toast);
+                    }
+                }, 300);
+            }, 4000);
+        }
+    </script>
+</body>
+</html> 

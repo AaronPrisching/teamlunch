@@ -1,0 +1,30 @@
+{
+    "2025-05-25": {
+        "user_votes": {
+            "aaronprisching@gmail.com": "Test_Test"
+        },
+        "suggested_restaurants": {
+            "Test_Test": {
+                "name": "Test",
+                "image": "https://image.stern.de/35062684/t/zH/v4/w1440/r1.7778/-/pizza-ranking.jpg",
+                "delivery_time": "6-20min",
+                "minimum_order": "15\u20ac",
+                "suggested_by": "aaronprisching@gmail.com"
+            },
+            "mcdonalds": {
+                "name": "McDonald's",
+                "image": "images/classic-burger.jpg",
+                "delivery_time": "10-20 min",
+                "minimum_order": "15\u20ac",
+                "suggested_by": "aaronprisching@gmail.com"
+            },
+            "vegan_burgers": {
+                "name": "Vegan Burgers",
+                "image": "images/vegan-burger.jpg",
+                "delivery_time": "20-30 min",
+                "minimum_order": "15\u20ac",
+                "suggested_by": "aaronprisching@gmail.com"
+            }
+        }
+    }
+}

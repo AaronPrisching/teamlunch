@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrieren - TeamLunch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0F172A', // Nachtblau
+                            800: '#1C1C1E', // Anthrazit
+                        },
+                        accent: {
+                            blue: '#38BDF8', // Neonblau
+                            green: '#84CC16', // Limettengrün
+                            purple: '#A855F7', // Violett
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .bg-pattern {
+            background-color: #0F172A;
+            background-image: radial-gradient(rgba(56, 189, 248, 0.1) 2px, transparent 2px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+        }
+    </style>
+</head>
+<body class="bg-pattern text-white font-poppins dark">
+    <div class="min-h-screen flex flex-col">
+        <!-- Logo Navigation -->
+        <nav class="pt-6 px-6 relative z-10">
+            <a href="index.html" class="text-xl font-bold text-accent-blue">
+                Team<span class="text-accent-green">Lunch</span>
+            </a>
+        </nav>
+        
+        <!-- Registration Form -->
+        <div class="flex-grow flex items-center justify-center px-4 relative z-10">
+            <div class="max-w-md w-full bg-dark-800/80 backdrop-blur-lg p-8 rounded-2xl border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.3)]">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold mb-2">Werde Teil des Teams</h1>
+                    <p class="text-white/60">Erstelle ein Konto, um gemeinsam mit deinem Team zu bestellen</p>
+                </div>
+                
+                <form id="registerForm">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="firstname" class="block text-sm font-medium text-white/70 mb-1">Vorname</label>
+                            <input type="text" id="firstname" name="firstname" class="w-full bg-dark-900/70 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-accent-blue/50 transition-all" placeholder="Max" required>
+                        </div>
+                        <div>
+                            <label for="lastname" class="block text-sm font-medium text-white/70 mb-1">Nachname</label>
+                            <input type="text" id="lastname" name="lastname" class="w-full bg-dark-900/70 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-accent-blue/50 transition-all" placeholder="Mustermann" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-white/70 mb-1">E-Mail-Adresse</label>
+                        <input type="email" id="email" name="email" class="w-full bg-dark-900/70 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-accent-blue/50 transition-all" placeholder="deine@email.com" required>
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-white/70 mb-1">Passwort</label>
+                        <input type="password" id="password" name="password" class="w-full bg-dark-900/70 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-accent-blue/50 transition-all" placeholder="••••••••" required>
+                        <p class="mt-1 text-xs text-white/50">Mindestens 8 Zeichen mit Buchstaben, Zahlen und Sonderzeichen</p>
+                    </div>
+                    
+                    <div>
+                        <label for="department" class="block text-sm font-medium text-white/70 mb-1">Abteilung</label>
+                        <select id="department" name="department" class="w-full bg-dark-900/70 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-accent-blue/50 transition-all appearance-none" required>
+                            <option value="" disabled selected>Wähle deine Abteilung</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="design">Design</option>
+                            <option value="product">Produktmanagement</option>
+                            <option value="sales">Vertrieb</option>
+                            <option value="finance">Finanzen</option>
+                            <option value="hr">HR</option>
+                            <option value="other">Andere</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input type="checkbox" id="terms" name="terms" class="h-4 w-4 rounded bg-dark-900 border-white/20 text-accent-blue focus:ring-accent-blue/50" required>
+                        <label for="terms" class="ml-2 block text-sm text-white/70">
+                            Ich akzeptiere die <a href="#" class="text-accent-blue hover:text-accent-blue/80 transition-colors">Nutzungsbedingungen</a> und <a href="#" class="text-accent-blue hover:text-accent-blue/80 transition-colors">Datenschutzrichtlinien</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-accent-green to-accent-blue rounded-lg px-4 py-3 text-white font-medium hover:shadow-[0_0_20px_rgba(132,204,22,0.4)] transition-all">
+                        Konto erstellen
+                    </button>
+                </form>
+                
+                <div id="registerError" class="mt-8 text-center text-sm text-red-500"></div>
+                
+                <div class="mt-8 text-center text-sm text-white/60">
+                    <p>Bereits ein Konto? <a href="login.html" class="text-accent-blue hover:underline">Jetzt anmelden</a></p>
+                </div>
+                
+                <!-- Company Info -->
+                <div class="mt-8 pt-6 border-t border-white/10">
+                    <p class="text-center text-xs text-white/50">
+                        TeamLunch ist das moderne Bestellsystem für dein Team. Schnell, einfach und ohne Chaos.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="py-6 px-6 text-center text-white/40 text-xs relative z-10">
+            <p>© 2023 TeamLunch. Alle Rechte vorbehalten.</p>
+        </footer>
+    </div>
+
+    <script src="js/register_local.js"></script>
+</body>
+</html> 

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestellungen - TeamLunch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0F172A', // Nachtblau
+                            800: '#1C1C1E', // Anthrazit
+                        },
+                        accent: {
+                            blue: '#38BDF8', // Neonblau
+                            green: '#84CC16', // Limettengrün
+                            purple: '#A855F7', // Violett
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-900 text-white font-poppins dark">
+    <div class="min-h-screen flex flex-col">
+        <!-- Navigation -->
+        <nav class="backdrop-blur-md bg-dark-800/70 border-b border-dark-900/50 fixed w-full z-10">
+            <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold text-accent-blue">
+                        Team<span class="text-accent-green">Lunch</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-white/80 hover:text-accent-blue transition-colors">Home</a>
+                    <a href="voting.html" class="text-white/80 hover:text-accent-blue transition-colors">Abstimmung</a>
+                    <a href="order.html" class="text-accent-blue transition-colors">Bestellungen</a>
+                    <a href="/download" class="text-white/80 hover:text-accent-green transition-colors flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                        App Download
+                    </a>
+                    <a href="profile.html" class="text-white/80 hover:text-accent-blue transition-colors">Profil</a>
+                    <a href="faq.html" class="text-white/80 hover:text-accent-blue transition-colors">Hilfe</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    {% if session.user %}
+                    <a href="profile.html" class="px-4 py-2 bg-dark-900/70 backdrop-blur-sm rounded-lg border border-accent-blue/20 hover:border-accent-blue/50 transition-all hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] text-white/90">
+                        Profil
+                    </a>
+                    <a href="/logout" class="px-4 py-2 bg-gradient-to-r from-accent-blue to-accent-purple rounded-lg hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all text-white">
+                        Abmelden
+                    </a>
+                    {% else %}
+                    <a href="login.html" class="px-4 py-2 bg-dark-900/70 backdrop-blur-sm rounded-lg border border-accent-blue/20 hover:border-accent-blue/50 transition-all hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] text-white/90">
+                        Anmelden
+                    </a>
+                    <a href="register.html" class="px-4 py-2 bg-gradient-to-r from-accent-blue to-accent-purple rounded-lg hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all text-white">
+                        Registrieren
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation -->
+        <div class="fixed bottom-0 left-0 right-0 bg-dark-800/90 backdrop-blur-md border-t border-dark-900/50 md:hidden z-10">
+            <div class="flex justify-around">
+                <a href="index.html" class="py-3 flex flex-col items-center text-white/70 hover:text-accent-blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span class="text-xs mt-1">Home</span>
+                </a>
+                <a href="voting.html" class="py-3 flex flex-col items-center text-white/70 hover:text-accent-blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    <span class="text-xs mt-1">Abstimmung</span>
+                </a>
+                <a href="order.html" class="py-3 flex flex-col items-center text-accent-blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span class="text-xs mt-1">Bestellungen</span>
+                </a>
+                <a href="/download" class="py-3 flex flex-col items-center text-white/70 hover:text-accent-green">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    <span class="text-xs mt-1">App</span>
+                </a>
+                <a href="profile.html" class="py-3 flex flex-col items-center text-white/70 hover:text-accent-blue">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span class="text-xs mt-1">Profil</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-grow pt-20 pb-20 md:pb-12">
+            <div class="container mx-auto px-4">
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="bg-accent-green/20 border border-accent-green/30 text-accent-green rounded-lg px-4 py-3 mb-6">
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                {% endwith %}
+                
+                <!-- Header -->
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold mb-2">Bestellungen</h1>
+                    <p class="text-white/70">Wähle ein Restaurant und bestelle dein Essen für das Team-Mittagessen.</p>
+                </div>
+
+                {% if not session.user %}
+                <!-- Login Required Message -->
+                <div class="bg-dark-800/60 rounded-xl border border-white/10 p-8 text-center my-12">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-accent-blue/70 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <h2 class="text-2xl font-semibold mb-4">Anmeldung erforderlich</h2>
+                    <p class="text-white/70 mb-6 max-w-md mx-auto">Du musst angemeldet sein, um eine Bestellung aufzugeben. Bitte melde dich an oder erstelle ein Konto.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="login.html" class="px-6 py-3 bg-accent-blue rounded-lg hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all text-white">
+                            Anmelden
+                        </a>
+                        <a href="register.html" class="px-6 py-3 bg-dark-900/70 backdrop-blur-sm rounded-lg border border-accent-blue/20 hover:border-accent-blue/50 transition-all hover:shadow-[0_0_15px_rgba(56,189,248,0.3)] text-white/90">
+                            Registrieren
+                        </a>
+                    </div>
+                </div>
+                {% else %}
+
+                <!-- Restaurant Selection -->
+                <div class="mb-10">
+                    <h2 class="text-xl font-semibold mb-4">Verfügbare Restaurants</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {% for restaurant_id, restaurant in restaurants.items() %}
+                        <div class="bg-dark-800/60 rounded-xl border border-white/10 overflow-hidden hover:shadow-[0_5px_30px_rgba(56,189,248,0.15)] transition-all group">
+                            <div class="h-40 bg-gradient-to-b from-dark-900/0 to-dark-900 relative overflow-hidden">
+                                <img src="{{ restaurant.image }}" alt="{{ restaurant.name }}" class="w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity">
+                                <div class="absolute inset-0 bg-gradient-to-t from-dark-900 to-dark-900/0"></div>
+                                <div class="absolute bottom-3 left-4 right-4 flex justify-between items-center">
+                                    <h3 class="text-lg font-semibold">{{ restaurant.name }}</h3>
+                                    <span class="px-2 py-1 bg-accent-blue/20 text-accent-blue text-xs rounded-full">{{ restaurant.rating }} ★</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex items-center text-white/60 text-sm mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <span>{{ restaurant.delivery_time }} Lieferzeit</span>
+                                </div>
+                                <a href="/restaurant/{{ restaurant_id }}" class="block w-full py-2 bg-accent-blue rounded-lg hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] transition-all text-white font-medium text-center">
+                                    Zur Speisekarte
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold mb-4">Deine letzten Bestellungen</h2>
+                    <div class="bg-dark-800/60 rounded-xl border border-white/10 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b border-white/10">
+                                        <th class="text-left p-4 text-white/70">Bestell-ID</th>
+                                        <th class="text-left p-4 text-white/70">Restaurant</th>
+                                        <th class="text-left p-4 text-white/70">Datum</th>
+                                        <th class="text-left p-4 text-white/70">Status</th>
+                                        <th class="text-right p-4 text-white/70">Gesamt</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set user_has_orders = false %}
+                                    {% for order_id, order in orders.items() %}
+                                        {% if order.user == session.user %}
+                                        {% set user_has_orders = true %}
+                                        <tr class="border-b border-white/10 hover:bg-dark-900/30">
+                                            <td class="p-4">{{ order_id }}</td>
+                                            <td class="p-4">
+                                                {% if order.restaurant in restaurants %}
+                                                {{ restaurants[order.restaurant].name }}
+                                                {% else %}
+                                                Unbekanntes Restaurant
+                                                {% endif %}
+                                            </td>
+                                            <td class="p-4">{{ order.date }}</td>
+                                            <td class="p-4">
+                                                {% if order.status == 'pending_payment' %}
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent-blue/20 text-accent-blue">
+                                                    Zahlung ausstehend
+                                                </span>
+                                                {% elif order.status == 'paid' %}
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent-green/20 text-accent-green">
+                                                    Bezahlt
+                                                </span>
+                                                {% elif order.status == 'processing' %}
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent-purple/20 text-accent-purple">
+                                                    In Bearbeitung
+                                                </span>
+                                                {% elif order.status == 'completed' %}
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent-green/20 text-accent-green">
+                                                    Abgeschlossen
+                                                </span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="p-4 text-right">
+                                                {% if order.total is defined %}
+                                                {{ order.total }} €
+                                                {% else %}
+                                                -
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                    
+                                    {% if not user_has_orders %}
+                                    <tr>
+                                        <td colspan="5" class="p-8 text-center text-white/60">Du hast noch keine Bestellungen aufgegeben.</td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-8 bg-dark-800/70 border-t border-dark-900/50">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <a href="index.html" class="text-xl font-bold text-accent-blue">
+                            Team<span class="text-accent-green">Lunch</span>
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap justify-center space-x-4 mb-4 md:mb-0">
+                        <a href="index.html" class="text-white/60 hover:text-accent-blue transition-colors">Home</a>
+                        <a href="voting.html" class="text-white/60 hover:text-accent-blue transition-colors">Abstimmung</a>
+                        <a href="order.html" class="text-white/60 hover:text-accent-blue transition-colors">Bestellungen</a>
+                        <a href="faq.html" class="text-white/60 hover:text-accent-blue transition-colors">Hilfe</a>
+                    </div>
+                    <div class="text-white/60 text-sm">
+                        © 2023 TeamLunch. Alle Rechte vorbehalten.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/order_local.js"></script>
+    <div id="orderHistory"></div>
+</body>
+</html> 

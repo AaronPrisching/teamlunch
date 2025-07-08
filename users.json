@@ -1,0 +1,21 @@
+{
+    "admin@teamlunch.de": {
+        "firstname": "Admin",
+        "lastname": "User",
+        "password": "admin123",
+        "department": "IT",
+        "isAdmin": true
+    },
+    "aaronprisching@gmail.com": {
+        "firstname": "Aaron",
+        "lastname": "Prisching",
+        "password": "Xgqgkvkuutqhhjth1.",
+        "department": "IT",
+        "isAdmin": true,
+        "notification_settings": {
+            "orders": true,
+            "votes": true,
+            "reports": true
+        }
+    }
+}

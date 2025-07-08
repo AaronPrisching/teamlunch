@@ -1,0 +1,28 @@
+{
+    "burger_king": [
+        {
+            "id": "whopper",
+            "name": "Whopper",
+            "price": 6.99,
+            "description": "Flame-grilled beef patty with tomatoes, lettuce, mayo, ketchup, pickles, and onions on a sesame seed bun",
+            "image": "images/classic-burger.jpg",
+            "category": "Burger"
+        },
+        {
+            "id": "cheeseburger",
+            "name": "Cheeseburger",
+            "price": 4.99,
+            "description": "Beef patty with cheese, pickles, mustard, and ketchup on a sesame seed bun",
+            "image": "images/classic-burger.jpg",
+            "category": "Burger"
+        },
+        {
+            "id": "fries",
+            "name": "Pommes Frites",
+            "price": 2.99,
+            "description": "Knusprige goldene Pommes Frites mit Salz",
+            "image": "images/fries.jpg",
+            "category": "Beilagen"
+        }
+    ]
+}

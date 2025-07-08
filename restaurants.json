@@ -1,0 +1,26 @@
+{
+    "burger_king": {
+        "name": "Burger King",
+        "image": "images/burger-restaurant.jpg",
+        "delivery_time": "15-25 min",
+        "rating": 4.2
+    },
+    "mcdonalds": {
+        "name": "McDonald's",
+        "image": "images/classic-burger.jpg",
+        "delivery_time": "10-20 min",
+        "rating": 4.0
+    },
+    "vegan_burgers": {
+        "name": "Vegan Burgers",
+        "image": "images/vegan-burger.jpg",
+        "delivery_time": "20-30 min",
+        "rating": 4.5
+    },
+    "Test_Test": {
+        "name": "Test",
+        "image": "https://image.stern.de/35062684/t/zH/v4/w1440/r1.7778/-/pizza-ranking.jpg",
+        "delivery_time": "6-20min",
+        "rating": 4
+    }
+}
