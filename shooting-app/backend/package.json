@@ -1,0 +1,15 @@
+{
+  "name": "shooting-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Backend fuer Schießergebnisse",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "xml2js": "^0.4.23",
+    "cors": "^2.8.5"
+  }
+}
