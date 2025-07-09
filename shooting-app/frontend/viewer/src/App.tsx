@@ -8,20 +8,34 @@ export default function App() {
   const [scores, setScores] = useState<ScoreEntry[]>([]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const load = () =>
       fetch('http://localhost:3001/scores')
-        .then(res => res.json())
+        .then((res) => res.json())
         .then(setScores);
-    }, 5000);
+    load();
+    const interval = setInterval(load, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Rangliste</h1>
-      <pre className="bg-gray-800 p-2 rounded">
-        {JSON.stringify(scores, null, 2)}
-      </pre>
+      <table className="min-w-full bg-gray-800 rounded">
+        <thead>
+          <tr>
+            <th className="px-2 py-1 text-left">Schütze</th>
+            <th className="px-2 py-1 text-right">Punkte</th>
+          </tr>
+        </thead>
+        <tbody>
+          {scores.map((s, i) => (
+            <tr key={i} className="odd:bg-gray-700">
+              <td className="px-2 py-1">{s.name}</td>
+              <td className="px-2 py-1 text-right">{s.score}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

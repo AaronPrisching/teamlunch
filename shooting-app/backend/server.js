@@ -1,6 +1,6 @@
 import express from 'express';
 import fs from 'fs';
-import {parseStringPromise} from 'xml2js';
+import { parseStringPromise } from 'xml2js';
 import cors from 'cors';
 
 const app = express();
@@ -21,7 +21,10 @@ async function importXml() {
   try {
     const xml = fs.readFileSync(config.xmlPath, 'utf8');
     const result = await parseStringPromise(xml);
-    scores = result; // hier koennte eine genauere Verarbeitung erfolgen
+    scores = (result.results.shooter || []).map((s) => ({
+      name: s.name[0],
+      score: parseInt(s.score[0], 10) || 0,
+    }));
     console.log('XML importiert:', new Date());
   } catch (err) {
     console.error('Fehler beim Import:', err.message);
@@ -41,7 +44,8 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/scores', (req, res) => {
-  res.json(scores);
+  const sorted = [...scores].sort((a, b) => b.score - a.score);
+  res.json(sorted);
 });
 
 app.post('/config/xml-path', (req, res) => {
